@@ -1,9 +1,7 @@
 <script>
 	import PosterLayout from '$lib/PosterLayout.svelte';
 	import { onMount } from 'svelte';
-
-	let movieData = $state(null);
-	let incomingData = $state(null);
+	import ColorThief from 'colorthief';
 
 	async function getMovieData(id, mediaType) {
 		try {
@@ -29,6 +27,8 @@
 		}
 	}
 
+	let movieData = $state(null);
+	let incomingData = $state(null);
 	let mediaType = $state('');
 	onMount(async () => {
 		incomingData = JSON.parse(localStorage.getItem('selectedData'));
@@ -57,7 +57,6 @@
 				director={movieData.director}
 				actors={movieData.actors}
 				imgSrc={incomingData.imageSrc}
-				colorPalette={['rgb(0,0,0)', '#FFFFFF', '#C0C0C0', '#808080', '#FF0000']}
 			/>
 		{:else}
 			<p>Loading...</p>
