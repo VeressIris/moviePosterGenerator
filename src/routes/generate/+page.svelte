@@ -1,7 +1,7 @@
 <script>
 	import Cropper from 'svelte-easy-crop';
 
-	let imageSrc = null;
+	let imageSrc = $state(null);
 
 	function handleFileUpload(event) {
 		const file = event.target.files[0];
@@ -10,9 +10,9 @@
 		}
 	}
 
-	let crop = { x: 0, y: 0 };
-	let zoom = 1;
-	let doneCropping = false;
+	let crop = $state({ x: 0, y: 0 });
+	let zoom = $state(1);
+	let doneCropping = $state(false);
 	let croppedAreaPixels = null;
 
 	async function getCroppedImage(crop, croppedAreaPixels) {
@@ -51,6 +51,35 @@
 			img.src = src;
 		});
 	}
+
+	let results = $state([]);
+	let selectedID = $state(null);
+	let searching = $state(false);
+	let title = $state('');
+
+	async function getResults() {
+		try {
+			const response = await fetch(
+				`http://localhost:5173/server/getSearchResults?title=${encodeURIComponent(title)}`,
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error(`Error: ${response.status} ${response.statusText}`);
+			}
+
+			const data = await response.json();
+			return data.content;
+		} catch (err) {
+			console.error('Failed to fetch results:', err);
+			return [];
+		}
+	}
 </script>
 
 <div class="mx-8 my-4 flex flex-col">
@@ -62,20 +91,55 @@
 			<input
 				type="text"
 				name="title"
-				placeholder="Title"
+				id="title"
+				placeholder="ex: Pulp Fiction"
 				class="rounded-xl border px-2 py-1"
 				required
+				bind:value={title}
+				oninput={async (e) => {
+					searching = true;
+					if (e.target.value != '') {
+						results = await getResults(e.target.value);
+						console.log(results);
+					}
+				}}
 			/>
+			{#if searching}
+				<div>
+					<p class="font-semibold">Are you looking for</p>
+					{#each results as result}
+						<button
+							onclick={() => {
+								searching = false;
+
+								title = result.name;
+								selectedID = result.id;
+
+								console.log(selectedID);
+							}}
+							type="button"
+							class="border-dove-gray-400 hover:bg-off-white-200 w-full rounded-xl border-b-2 px-2 text-start hover:cursor-pointer"
+						>
+							<p>
+								<span class="font-semibold">{result.name}</span> ({result.release_date.split(
+									'-'
+								)[0]})
+							</p>
+						</button>
+					{/each}
+				</div>
+			{/if}
 		</div>
 		<div class="mb-4 flex w-full flex-col">
-			<label for="title" class="text-xl font-semibold">Image</label>
+			<label for="image" class="text-xl font-semibold">Image</label>
 			<input
 				type="file"
+				id="image"
 				name="image"
 				class="rounded-xl border px-2 py-1"
 				accept="image/*"
 				required
-				on:change={handleFileUpload}
+				onchange={handleFileUpload}
 			/>
 		</div>
 	</form>
@@ -102,7 +166,7 @@
 			<!-- TODO: Change button position with media queries -->
 			<button
 				class="text-off-white-100 active:bg-cyan-1100 hover:bg-cyan-1000 absolute right-4 top-[calc(20vh+1rem)] w-24 rounded-xl bg-cyan-900 py-2 text-xl font-bold"
-				on:click={async () => {
+				onclick={async () => {
 					doneCropping = true;
 					const croppedImageSrc = await getCroppedImage(crop, croppedAreaPixels);
 					imageSrc = croppedImageSrc;

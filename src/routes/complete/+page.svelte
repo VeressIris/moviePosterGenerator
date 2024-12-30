@@ -1,7 +1,5 @@
 <script>
 	import PosterLayout from '$lib/PosterLayout.svelte';
-
-	// fetch movie data from API
 </script>
 
 <div class="mx-8 my-4 flex flex-col items-center">
