@@ -3,12 +3,13 @@ import { json } from '@sveltejs/kit';
 
 export async function GET({ url }) {
 	try {
-		const title = url.searchParams.get('title');
-		if (!title) {
-			return json({ response: 'error', content: 'Title parameter is missing' }, { status: 400 });
+		const id = url.searchParams.get('id');
+		if (!id) {
+			return json({ response: 'error', content: 'ID parameter is missing' }, { status: 400 });
 		}
 
-		const searchUrl = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(title)}&include_adult=false&language=en-US&page=1`;
+		const searchUrl = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
+
 		const options = {
 			method: 'GET',
 			headers: {
@@ -26,15 +27,15 @@ export async function GET({ url }) {
 		}
 
 		const results = await response.json();
-		const filteredResults = results.results.map((result) => ({
-			id: result.id,
-			name: result.name || result.title, // Handle both movies and TV shows
-			release_date: result.release_date || result.first_air_date, // Handle both movies and TV shows
-			media_type: result.media_type
-		}));
-		return json({ response: 'success', content: filteredResults.slice(0, 5) }, { status: 200 });
+		return json({ response: 'success', content: findDirector(results.crew) }, { status: 200 });
 	} catch (err) {
 		console.error(err);
 		return json({ response: 'error', content: err.message }, { status: 500 });
 	}
+}
+
+function findDirector(arr) {
+	arr = arr.sort((a, b) => b.popularity - a.popularity);
+	const director = arr.find((person) => person.known_for_department == 'Directing');
+	return director.name;
 }

@@ -1,8 +1,9 @@
 <script>
-	let { imgSrc, title, releaseDate, runtime, genres, director, actors, colorPalette } = $props();
+	let { imgSrc, title, releaseDate, runtime, genres, director, actors, colorPalette, mediaType } =
+		$props();
 </script>
 
-<div class="flex flex-col items-start">
+<div class="flex flex-col items-start px-6 pb-8 pt-2">
 	<div class="mb-2 flex w-full justify-between">
 		<div class="flex">
 			{#each colorPalette as color}
@@ -15,10 +16,14 @@
 	<div class="flex flex-col">
 		<div class="mb-2 flex items-end">
 			<h1 class="mr-2">{title}</h1>
-			<p class="text-xl">{releaseDate}</p>
+			<p class="text-xl">{releaseDate.split('-')[0]}</p>
 		</div>
 		<p>Genres: <span class="font-bold">{genres.map((genre) => ` ${genre.toUpperCase()}`)}</span></p>
-		<p>Runtime: <span class="font-bold">{runtime.toUpperCase()}</span></p>
+		{#if mediaType == 'tv'}
+			<p>Running for: <span class="font-bold">{runtime} SEASONS</span></p>
+		{:else}
+			<p>Runtime: <span class="font-bold">{runtime} MINUTES</span></p>
+		{/if}
 		<p>Directed by: <span class="font-bold">{director.toUpperCase()}</span></p>
 		<p class="mt-2">
 			Starring: <span class="font-bold">{actors.map((actor) => ` ${actor.toUpperCase()}`)}</span>

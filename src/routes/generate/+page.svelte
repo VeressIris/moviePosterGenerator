@@ -1,5 +1,6 @@
 <script>
 	import Cropper from 'svelte-easy-crop';
+	import { goto } from '$app/navigation';
 
 	let imageSrc = $state(null);
 
@@ -52,11 +53,11 @@
 		});
 	}
 
-	let results = $state([]);
-	let selectedID = $state(null);
-	let searching = $state(false);
 	let title = $state('');
-
+	let results = $state([]);
+	let searching = $state(false);
+	let selectedID = $state(null);
+	let selectedMediaType = $state('');
 	async function getResults() {
 		try {
 			const response = await fetch(
@@ -114,8 +115,7 @@
 
 								title = result.name;
 								selectedID = result.id;
-
-								console.log(selectedID);
+								selectedMediaType = result.media_type;
 							}}
 							type="button"
 							class="border-dove-gray-400 hover:bg-off-white-200 w-full rounded-xl border-b-2 px-2 text-start hover:cursor-pointer"
@@ -150,7 +150,11 @@
 		<button
 			type="submit"
 			class="text-off-white-100 active:bg-cyan-1100 hover:bg-cyan-1000 mx-auto mt-4 w-24 rounded-xl bg-cyan-900 py-2 text-xl font-bold"
-			>Next</button
+			onclick={() => {
+				const data = { selectedID, title, imageSrc, selectedMediaType };
+				localStorage.setItem('selectedData', JSON.stringify(data));
+				goto('/complete');
+			}}>Next</button
 		>
 		{#if !doneCropping}
 			<Cropper

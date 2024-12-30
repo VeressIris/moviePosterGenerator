@@ -1,5 +1,41 @@
 <script>
 	import PosterLayout from '$lib/PosterLayout.svelte';
+	import { onMount } from 'svelte';
+
+	let movieData = $state(null);
+	let incomingData = $state(null);
+
+	async function getMovieData(id, mediaType) {
+		try {
+			const response = await fetch(
+				`http://localhost:5173/server/getContentData?id=${encodeURIComponent(id)}&mediaType=${encodeURIComponent(mediaType)}`,
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error(`Error: ${response.status} ${response.statusText}`);
+			}
+
+			const data = await response.json();
+			return data.content;
+		} catch (err) {
+			console.error('Failed to fetch result:', err);
+			return {};
+		}
+	}
+
+	let mediaType = $state('');
+	onMount(async () => {
+		incomingData = JSON.parse(localStorage.getItem('selectedData'));
+		if (incomingData) {
+			movieData = await getMovieData(incomingData.selectedID, incomingData.selectedMediaType);
+		}
+	});
 </script>
 
 <div class="mx-8 my-4 flex flex-col items-center">
@@ -9,16 +45,22 @@
 		class="text-off-white-100 hover:bg-cyan-1000 active:bg-cyan-1100 mb-6 rounded-xl bg-cyan-900 px-3 py-2 text-xl font-bold"
 		>Download</button
 	>
+
 	<div class="border-dove-gray-100 rounded-md border-2 p-2">
-		<PosterLayout
-			imgSrc="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercosmos.com%2Fw%2Ffull%2F7%2F2%2F4%2F172506-2984x2000-desktop-hd-the-shawshank-redemption-background-image.jpg&f=1&nofb=1&ipt=23696381a15f291c9257783d9703a13fff365db20e528a93112744605c4c1d8a&ipo=images"
-			title="THE SHAWSHANK REDEMPTION"
-			releaseDate="1994"
-			runtime="142 min"
-			genres={['Drama', 'Historical']}
-			director="Frank Darabont"
-			actors={['Tim Robbins', 'Morgan Freeman']}
-			colorPalette={['rgb(0,0,0)', '#FFFFFF', '#C0C0C0', '#808080', '#FF0000']}
-		/>
+		{#if movieData}
+			<PosterLayout
+				title={incomingData.title}
+				releaseDate={movieData.release_date}
+				mediaType={incomingData.selectedMediaType}
+				runtime={movieData.runtime}
+				genres={movieData.genres}
+				director={movieData.director}
+				actors={movieData.actors}
+				imgSrc={incomingData.imageSrc}
+				colorPalette={['rgb(0,0,0)', '#FFFFFF', '#C0C0C0', '#808080', '#FF0000']}
+			/>
+		{:else}
+			<p>Loading...</p>
+		{/if}
 	</div>
 </div>
