@@ -4,11 +4,18 @@ import { json } from '@sveltejs/kit';
 export async function GET({ url }) {
 	try {
 		const id = url.searchParams.get('id');
+		const mediaType = url.searchParams.get('mediaType');
 		if (!id) {
 			return json({ response: 'error', content: 'ID parameter is missing' }, { status: 400 });
 		}
+		if (!mediaType) {
+			return json(
+				{ response: 'error', content: 'mediaType parameter is missing' },
+				{ status: 400 }
+			);
+		}
 
-		const searchUrl = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
+		const searchUrl = `https://api.themoviedb.org/3/${mediaType}/${id}/credits?language=en-US`;
 
 		const options = {
 			method: 'GET',

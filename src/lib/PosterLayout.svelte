@@ -25,7 +25,7 @@
 			colorPalette = colorPalette.map((color) => `rgb(${color[0]}, ${color[1]}, ${color[2]})`);
 			console.log(colorPalette);
 		} else {
-			image.addEventListener('load', function () {
+			img.addEventListener('load', function () {
 				colorThief.getPalette(img, 5);
 			});
 		}
@@ -71,7 +71,7 @@
 	});
 </script>
 
-<div class="flex flex-col items-start px-6 pb-8 pt-2">
+<div class="flex flex-col items-start px-6 py-8">
 	<div class="mb-2 flex w-full justify-between">
 		<div class="flex">
 			{#each colorPalette as color}

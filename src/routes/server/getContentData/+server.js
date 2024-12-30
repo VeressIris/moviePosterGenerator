@@ -34,12 +34,7 @@ export async function GET({ url }) {
 
 		const result = await response.json();
 		const actors = await getActors(id, mediaType);
-		let director = '';
-		if (mediaType == 'movie') {
-			director = await getDirector(id);
-		} else {
-			director = result.created_by[0].name;
-		}
+		const director = await getDirector(id, mediaType);
 		const filteredResponse = {
 			name: result.name || result.title, // Handle both movies and TV shows
 			release_date: result.release_date || result.first_air_date, // Handle both movies and TV shows
@@ -71,9 +66,11 @@ async function getActors(id, mediaType) {
 	}
 }
 
-async function getDirector(id) {
+async function getDirector(id, mediaType) {
 	try {
-		const response = await fetch(`http://localhost:5173/server/getMovieDirector?id=${id}`);
+		const response = await fetch(
+			`http://localhost:5173/server/getDirector?id=${id}&mediaType=${mediaType}`
+		);
 		if (!response.ok) {
 			throw new Error(`Failed to fetch cast: ${response.status} ${response.statusText}`);
 		}
