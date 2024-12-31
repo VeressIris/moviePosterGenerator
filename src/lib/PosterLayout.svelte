@@ -71,29 +71,50 @@
 	});
 </script>
 
-<div class="flex flex-col items-start px-6 py-8">
-	<div class="mb-2 flex w-full justify-between">
+<div
+	class="bg-off-white-100 flex aspect-[2/3] h-fit flex-col items-start rounded-md px-3 py-4 md:w-[540px] lg:w-[735px] lg:px-6"
+>
+	<div class="mb-1 flex w-full justify-between lg:mb-2">
 		<div class="flex">
 			{#each colorPalette as color}
-				<div class="h-8 w-8" style="background-color: {color}"></div>
+				<div class="aspect-square h-4 md:h-6 lg:h-8" style="background-color: {color}"></div>
 			{/each}
 		</div>
-		<img src="../that globe in a rectangle every design uses.png" alt="globe" class="h-8" />
+		<img
+			src="../that globe in a rectangle every design uses.png"
+			alt="globe"
+			class="h-4 md:h-6 lg:h-8"
+		/>
 	</div>
-	<img src={imgSrc} id="cover" alt="poster" class="mb-4 h-[800px] w-[600px] object-cover" />
+	<img
+		src={imgSrc}
+		id="cover"
+		alt="poster"
+		class="mb-3 aspect-[0.85/1] w-full object-cover xl:mb-4"
+	/>
 	<div class="flex flex-col">
-		<div class="mb-2 flex items-end">
-			<h1 class="mr-2">{title}</h1>
-			<p class="text-xl">{releaseDate.split('-')[0]}</p>
+		<div class="mb-1 flex items-end lg:mb-2 xl:mb-4">
+			<h1 class="mr-1.5 text-2xl md:text-3xl lg:text-4xl xl:mr-2.5 xl:text-5xl">{title}</h1>
+			<p class="pb-[2.5px] text-base md:p-0 md:text-lg lg:text-xl xl:text-2xl">
+				{releaseDate.split('-')[0]}
+			</p>
 		</div>
-		<p>Genres: <span class="font-bold">{genres.map((genre) => ` ${genre.toUpperCase()}`)}</span></p>
+		<p class="text-base md:text-lg lg:text-xl xl:text-2xl">
+			Genres: <span class="font-bold">{genres.map((genre) => ` ${genre.toUpperCase()}`)}</span>
+		</p>
 		{#if mediaType == 'tv'}
-			<p>Running for: <span class="font-bold">{runtime} SEASONS</span></p>
+			<p class="text-base md:text-lg lg:text-xl xl:text-2xl">
+				Running for: <span class="font-bold">{runtime} SEASONS</span>
+			</p>
 		{:else}
-			<p>Runtime: <span class="font-bold">{runtime} MINUTES</span></p>
+			<p class="text-base md:text-lg lg:text-xl xl:text-2xl">
+				Runtime: <span class="font-bold">{runtime} MINUTES</span>
+			</p>
 		{/if}
-		<p>Directed by: <span class="font-bold">{director.toUpperCase()}</span></p>
-		<p class="mt-2">
+		<p class="text-base md:text-lg lg:text-xl xl:text-2xl">
+			Directed by: <span class="font-bold">{director.toUpperCase()}</span>
+		</p>
+		<p class="mt-2 text-base md:text-lg lg:text-xl xl:mt-3 xl:pb-1 xl:text-2xl">
 			Starring: <span class="font-bold">{actors.map((actor) => ` ${actor.toUpperCase()}`)}</span>
 		</p>
 	</div>

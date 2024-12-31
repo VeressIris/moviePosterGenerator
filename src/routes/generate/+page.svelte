@@ -159,7 +159,7 @@
 		{#if !doneCropping}
 			<Cropper
 				image={imageSrc}
-				aspect={3 / 4}
+				aspect={0.84 / 1}
 				zoomSpeed={0.1}
 				bind:crop
 				bind:zoom

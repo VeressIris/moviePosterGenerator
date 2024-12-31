@@ -51,14 +51,14 @@
 	});
 </script>
 
-<div class="mx-8 my-4 flex flex-col items-center">
-	<h1>Your poster is complete!</h1>
+<div class="my-4 flex flex-col items-center">
+	<h1 class="mx-4">Your poster is complete!</h1>
 	<p class="mb-2">Don't forget to download it!</p>
 	<button
-		class="text-off-white-100 hover:bg-cyan-1000 active:bg-cyan-1100 mb-6 rounded-xl bg-cyan-900 px-3 py-2 text-xl font-bold"
+		class="text-off-white-100 hover:bg-cyan-1000 active:bg-cyan-1100 mb-3 rounded-xl bg-cyan-900 px-3 py-2 text-xl font-bold"
 		onclick={downloadimage}>Download</button
 	>
-	<div class="border-dove-gray-100 rounded-md border-2 p-2">
+	<div class="border-dove-gray-100 mx-3 rounded-md border-2 p-2">
 		{#if movieData}
 			<div bind:this={container}>
 				<PosterLayout
