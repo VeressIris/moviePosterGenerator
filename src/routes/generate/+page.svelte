@@ -83,6 +83,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Minimalist Posters | Generate</title>
+</svelte:head>
+
 <div class="mx-8 my-4 flex flex-col">
 	<h1 class="mb-3">Generate your movie poster</h1>
 	<p class="mb-6">Enter the data of your desired move/TV show and we'll do the rest!</p>

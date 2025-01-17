@@ -51,6 +51,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Minimalist Posters</title>
+</svelte:head>
+
 <div class="my-4 flex flex-col items-center">
 	<h1 class="mx-4">Your poster is complete!</h1>
 	<p class="mb-2">Don't forget to download it!</p>
