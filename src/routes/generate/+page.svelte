@@ -88,11 +88,11 @@
 	<title>Minimalist Posters | Generate</title>
 </svelte:head>
 
-<div class="mx-8 my-4 flex flex-col 2xl:mx-24">
+<div class="mx-8 my-4 flex h-screen flex-col 2xl:mx-24">
 	<h1 class="mb-3">Generate your movie poster</h1>
 	<p class="mb-6">Enter the data of your desired move/TV show and we'll do the rest!</p>
 	<div class="flex flex-wrap items-start">
-		<form class="flex max-w-xl flex-col items-center justify-center">
+		<form class="flex w-full max-w-xl flex-col items-center justify-center">
 			<div class="mb-4 flex w-full flex-col">
 				<label for="title" class="text-xl font-semibold">Title</label>
 				<input
