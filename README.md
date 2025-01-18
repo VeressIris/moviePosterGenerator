@@ -5,6 +5,8 @@ A web app that generates minimalist movie/TV show posters using only an image up
 See it in action at: https://minimalist-poster-generator.vercel.app
 
 ![image](https://github.com/user-attachments/assets/737e2cd8-8706-455a-af13-8168d2875687)
+![image](https://github.com/user-attachments/assets/8ac2d048-70aa-4bcd-8dcf-174a92adea1d)
+![image](https://github.com/user-attachments/assets/228e93f2-48d4-4687-bcb3-87e63a6be80c)
 
 
 # Technologies
