@@ -24,13 +24,13 @@
 		>
 			<img
 				class="border-dove-gray-100 w-[450px] rounded-lg border-2 2xl:w-[525px]"
-				src="minimal Interstellar poster.jpg"
-				alt="minimalist interstellar poster"
+				src="minimal Joker poster.jpg"
+				alt="minimalist joker 2019 poster"
 			/>
 			<img
 				class="border-dove-gray-100 w-[450px] rounded-lg border-2 2xl:w-[525px]"
-				src="minimal Fight Club poster.jpg"
-				alt="minimalist fight club poster"
+				src="minimal Interstellar poster.jpg"
+				alt="minimalist interstellar poster"
 			/>
 			<img
 				class="border-dove-gray-100 w-[450px] rounded-lg border-2 2xl:w-[525px]"
