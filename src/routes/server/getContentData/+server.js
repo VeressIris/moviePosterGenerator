@@ -53,7 +53,7 @@ export async function GET({ url }) {
 async function getActors(id, mediaType) {
 	try {
 		const response = await fetch(
-			`http://localhost:5173/server/getCast?id=${id}&mediaType=${mediaType}`
+			`https://minimalist-poster-generator.vercel.app/server/getCast?id=${id}&mediaType=${mediaType}`
 		);
 		if (!response.ok) {
 			throw new Error(`Failed to fetch cast: ${response.status} ${response.statusText}`);
@@ -69,7 +69,7 @@ async function getActors(id, mediaType) {
 async function getDirector(id, mediaType) {
 	try {
 		const response = await fetch(
-			`http://localhost:5173/server/getDirector?id=${id}&mediaType=${mediaType}`
+			`https://minimalist-poster-generator.vercel.app/server/getDirector?id=${id}&mediaType=${mediaType}`
 		);
 		if (!response.ok) {
 			throw new Error(`Failed to fetch cast: ${response.status} ${response.statusText}`);
