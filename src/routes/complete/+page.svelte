@@ -7,7 +7,7 @@
 	async function getMovieData(id, mediaType) {
 		try {
 			const response = await fetch(
-				`http://localhost:5173/server/getContentData?id=${encodeURIComponent(id)}&mediaType=${encodeURIComponent(mediaType)}`,
+				`https://minimalist-poster-generator.vercel.app/server/getContentData?id=${encodeURIComponent(id)}&mediaType=${encodeURIComponent(mediaType)}`,
 				{
 					method: 'GET',
 					headers: {

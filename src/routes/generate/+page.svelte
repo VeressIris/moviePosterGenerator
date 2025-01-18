@@ -62,7 +62,7 @@
 	async function getResults() {
 		try {
 			const response = await fetch(
-				`http://localhost:5173/server/getSearchResults?title=${encodeURIComponent(title)}`,
+				`https://minimalist-poster-generator.vercel.app/server/getSearchResults?title=${encodeURIComponent(title)}`,
 				{
 					method: 'GET',
 					headers: {
