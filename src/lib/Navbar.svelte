@@ -4,7 +4,7 @@
 		<a
 			href="/"
 			class="border-dove-gray-400 hover:text-dove-gray-400 mr-2 transition-all duration-[50ms] ease-in-out hover:scale-0 hover:cursor-pointer hover:border-b-2"
-			>About</a
+			>Home</a
 		>
 		<a
 			href="/generate"

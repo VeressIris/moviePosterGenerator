@@ -2,7 +2,7 @@
 	<title>Minimalist Posters | Home</title>
 </svelte:head>
 
-<div class="m-8 pb-8 2xl:mx-24">
+<div class="m-8 2xl:mx-24">
 	<h1 class="mb-2 md:text-5xl lg:text-6xl">The simplest way to generate a minimalist poster.</h1>
 	<p class="mb-4 text-xl md:text-2xl lg:text-3xl">
 		Create a minimalist poster for your favorite <span class="font-semibold italic"
