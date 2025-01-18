@@ -5,7 +5,7 @@
 <div class="bg-off-white-200 flex w-full items-center justify-between px-5 py-4 2xl:px-24">
 	<div>
 		<p class="max-w-48 text-xl font-semibold sm:w-fit lg:max-w-fit">Minimalist Poster Generator</p>
-		<p class="text-sm">@ Copyright {year}</p>
+		<p class="text-sm xl:text-base">© Copyright {year}</p>
 	</div>
 	<div class="flex flex-col">
 		<div class="flex justify-between">
