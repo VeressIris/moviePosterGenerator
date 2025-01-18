@@ -30,6 +30,10 @@
 	"dependencies": {
 		"colorthief": "^2.6.0",
 		"html2canvas": "^1.4.1",
-		"svelte-easy-crop": "^3.0.1"
+		"svelte-easy-crop": "^3.0.1",
+		"@sveltejs/adapter-vercel": "^5.5.2"
+	},
+	"engines": {
+		"node": "22.x"
 	}
 }
